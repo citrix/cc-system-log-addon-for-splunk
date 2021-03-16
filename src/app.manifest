@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "info": {
+    "title": "Citrix System Log Add-On for Splunk",
+    "id": {
+      "group": null,
+      "name": "citrix_systemlog_forwarder",
+      "version": "1.0.0"
+    },
+    "author": [
+      {
+        "name": "Citrix",
+        "email": null,
+        "company": null
+      }
+    ],
+    "releaseDate": null,
+    "description": "The Citrix System Log Forwarder allows customers to set up a connection between the Citrix Cloud Platform System Logs into their Splunk instance. This makes it easy for customers to have all audit logs sent to Splunk with just one configuration.",
+    "classification": {
+      "intendedAudience": null,
+      "categories": [],
+      "developmentStatus": null
+    },
+    "commonInformationModels": null,
+    "license": {
+      "name": null,
+      "text": null,
+      "uri": null
+    },
+    "privacyPolicy": {
+      "name": null,
+      "text": null,
+      "uri": null
+    },
+    "releaseNotes": {
+      "name": null,
+      "text": null,
+      "uri": null
+    }
+  },
+  "dependencies": {
+  },
+  "tasks": [],
+  "inputGroups": {
+  },
+  "incompatibleApps": {
+  },
+  "platformRequirements": {
+    "splunk": {
+      "Enterprise": "*"
+    }
+  }
+}

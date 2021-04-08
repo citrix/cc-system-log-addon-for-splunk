@@ -1,5 +1,5 @@
 
-import citrix_systemlog_forwarder_declare
+import citrix_system_log_add_on_declare
 
 from splunktaucclib.rest_handler.endpoint import (
     field,
@@ -28,7 +28,7 @@ model_logging = RestModel(fields_logging, name='logging')
 fields_additional_parameters = [
     field.RestField(
         'customer_id',
-        required=True,
+        required=False,
         encrypted=False,
         default='',
         validator=validator.String(
@@ -38,7 +38,7 @@ fields_additional_parameters = [
     ), 
     field.RestField(
         'client_id',
-        required=True,
+        required=False,
         encrypted=False,
         default='',
         validator=validator.String(
@@ -48,7 +48,7 @@ fields_additional_parameters = [
     ), 
     field.RestField(
         'client_secret',
-        required=True,
+        required=False,
         encrypted=True,
         default='',
         validator=validator.String(
@@ -61,7 +61,7 @@ model_additional_parameters = RestModel(fields_additional_parameters, name='addi
 
 
 endpoint = MultipleModel(
-    'citrix_systemlog_forwarder_settings',
+    'citrix_system_log_add_on_settings',
     models=[
         model_logging, 
         model_additional_parameters

@@ -1,10 +1,10 @@
 {
     "meta": {
-        "name": "citrix_systemlog_forwarder",
+        "name": "citrix-system-log-add-on",
         "displayName": "Citrix System Log Add-On for Splunk",
         "version": "1.0.0",
         "apiVersion": "3.0.0",
-        "restRoot": "citrix_systemlog_forwarder"
+        "restRoot": "citrix_system_log_add_on"
     },
     "pages": {
         "configuration": {
@@ -57,7 +57,7 @@
                             "label": "Customer ID",
                             "type": "text",
                             "help": "",
-                            "required": true,
+                            "required": false,
                             "defaultValue": "",
                             "validators": [
                                 {
@@ -73,7 +73,7 @@
                             "label": "Client ID",
                             "type": "text",
                             "help": "",
-                            "required": true,
+                            "required": false,
                             "defaultValue": "",
                             "validators": [
                                 {
@@ -89,7 +89,7 @@
                             "label": "Client secret",
                             "type": "text",
                             "help": "",
-                            "required": true,
+                            "required": false,
                             "defaultValue": "",
                             "encrypted": true,
                             "validators": [
@@ -158,8 +158,8 @@
             },
             "services": [
                 {
-                    "name": "citrix_systemlog_records",
-                    "title": "Citrix SystemLog Records",
+                    "name": "citrix_system_log_records",
+                    "title": "Citrix System Log Records",
                     "entity": [
                         {
                             "field": "name",

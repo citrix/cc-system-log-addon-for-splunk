@@ -1,5 +1,5 @@
 
-import citrix_systemlog_forwarder_declare
+import citrix_system_log_add_on_declare
 
 from splunktaucclib.rest_handler.endpoint import (
     field,
@@ -56,7 +56,7 @@ model = RestModel(fields, name=None)
 
 
 endpoint = DataInputModel(
-    'citrix_systemlog_records',
+    'citrix_system_log_records',
     model,
 )
 

@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
-<view template="citrix_systemlog_forwarder:templates/base.html" type="html" isDashboard="False">
+<view template="citrix-system-log-add-on:templates/base.html" type="html" isDashboard="False">
     <label>Inputs</label>
 </view>

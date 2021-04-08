@@ -4,7 +4,7 @@
     "title": "Citrix System Log Add-On for Splunk",
     "id": {
       "group": null,
-      "name": "citrix_systemlog_forwarder",
+      "name": "citrix-system-log-add-on",
       "version": "1.0.0"
     },
     "author": [

@@ -57,7 +57,9 @@ def get_token(helper, customer_id, client_id, client_secret):
         token_response.raise_for_status()
 
     get_token_json = token_response.json()
-    return get_token_json["token"]
+    token = get_token_json["token"]
+    
+    return token
 
 
 def get_new_records(helper, ew, customer_id, start_date, token):

@@ -14,8 +14,8 @@ if sys.version_info[0] < 3:
 else:
     py_version = "aob_py3"
 
-ta_name = 'citrix_systemlog_forwarder'
-ta_lib_name = 'citrix_systemlog_forwarder'
+ta_name = 'citrix-system-log-add-on'
+ta_lib_name = 'citrix_system_log_add_on'
 pattern = re.compile(r"[\\/]etc[\\/]apps[\\/][^\\/]+[\\/]bin[\\/]?$")
 new_paths = [path for path in sys.path if not pattern.search(path) or ta_name in path]
 new_paths.insert(0, os.path.sep.join([os.path.dirname(__file__), ta_lib_name]))

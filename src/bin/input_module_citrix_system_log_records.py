@@ -36,6 +36,15 @@ def collect_events(helper, ew):
     get_new_records(helper, ew, global_customer_id, start_date, token)
 
 
+def get_key_correct_case(keys, key):
+    key_lower = key.lower()
+    for currentKey in keys:
+        if currentKey.lower() == key_lower:
+            return currentKey
+    
+    return None
+
+
 def get_token(helper, customer_id, client_id, client_secret):
     get_token_url = "https://trust.citrixworkspacesapi.net/{}/tokens/clients".format(customer_id)
     get_token_headers = {
@@ -57,7 +66,8 @@ def get_token(helper, customer_id, client_id, client_secret):
         token_response.raise_for_status()
 
     get_token_json = token_response.json()
-    token = get_token_json["token"]
+    token_key = get_key_correct_case(get_token_json.keys(), "token")
+    token = get_token_json[token_key]
     
     return token
 
@@ -89,17 +99,23 @@ def get_new_records(helper, ew, customer_id, start_date, token):
 
         get_records_json = records_response.json()
 
-        for record in get_records_json["Items"]:
+        items_key = get_key_correct_case(get_records_json.keys(), "items")
+        for record in get_records_json[items_key]:
             records_event = helper.new_event(data=json.dumps(record), time=None, host=None,
                                             index=None, source=None, sourcetype=None, done=True,
                                             unbroken=True)
             ew.write_event(records_event)
-            if current_start_date < record["UtcTimestamp"]:
-                current_start_date = record["UtcTimestamp"]
+            
+            timestamp_key = get_key_correct_case(record.keys(), "utcTimestamp")
+            utc_timestamp = record[timestamp_key]
+            if current_start_date < utc_timestamp:
+                current_start_date = utc_timestamp
                 helper.save_check_point("start_date", current_start_date)
 
-        continuation_token = get_records_json["ContinuationToken"]
+        continuation_token_key = get_key_correct_case(get_records_json.keys(), "continuationToken")
+        continuation_token = get_records_json[continuation_token_key]
         
         if continuation_token == None:
             break
+
 

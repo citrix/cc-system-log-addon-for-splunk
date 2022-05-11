@@ -100,6 +100,29 @@
                                     "errorMsg": "Max length of password is 8192"
                                 }
                             ]
+                        },
+                        {
+                            "field": "cloud_environment",
+                            "label": "Cloud Environment",
+                            "type": "singleSelect",
+                            "options": {
+                                "disableSearch": true,
+                                "autoCompleteFields": [
+                                    {
+                                        "label": "Commercial",
+                                        "value": ".net"
+                                    },
+                                    {
+                                        "label": "Government",
+                                        "value": ".us"
+                                    },
+                                    {
+                                        "label": "Japan",
+                                        "value": ".jp"
+                                    }
+                                ]
+                            },
+                            "defaultValue": ".net"
                         }
                     ]
                 }

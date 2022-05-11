@@ -17,6 +17,7 @@ def collect_events(helper, ew):
     global_customer_id = helper.get_global_setting("customer_id")
     global_client_id = helper.get_global_setting("client_id")
     global_client_secret = helper.get_global_setting("client_secret")
+    global_cloud_environment = helper.get_global_setting('cloud_environment')
     
     start_date = helper.get_check_point("start_date")
     
@@ -31,9 +32,9 @@ def collect_events(helper, ew):
         else:
             start_date = "2010-01-01"
 
-    token = get_token(helper, global_customer_id, global_client_id, global_client_secret)
+    token = get_token(helper, global_customer_id, global_client_id, global_client_secret, global_cloud_environment)
 
-    get_new_records(helper, ew, global_customer_id, start_date, token)
+    get_new_records(helper, ew, global_customer_id, start_date, token, global_cloud_environment)
 
 
 def get_key_correct_case(keys, key):
@@ -45,8 +46,8 @@ def get_key_correct_case(keys, key):
     return None
 
 
-def get_token(helper, customer_id, client_id, client_secret):
-    get_token_url = "https://trust.citrixworkspacesapi.net/{}/tokens/clients".format(customer_id)
+def get_token(helper, customer_id, client_id, client_secret, cloud_environment):
+    get_token_url = "https://trust.citrixworkspacesapi{}/{}/tokens/clients".format(cloud_environment, customer_id)
     get_token_headers = {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -72,21 +73,23 @@ def get_token(helper, customer_id, client_id, client_secret):
     return token
 
 
-def get_new_records(helper, ew, customer_id, start_date, token):
+def get_new_records(helper, ew, customer_id, start_date, token, cloud_environment):
     continuation_token = None
     current_start_date = start_date
     while True:
-        get_records_url = "https://api-us.cloud.com/systemlog/records?StartDateTime={}".format(start_date)
-
-        if continuation_token != None:
-            get_records_url = "{}&ContinuationToken={}".format(get_records_url, continuation_token)
-
         get_records_auth = "CwsAuth Bearer={}".format(token)
         get_records_headers = {
             "Accept": "application/json",
-            "Authorization": get_records_auth,
-            "Citrix-CustomerId": customer_id
+            "Authorization": get_records_auth
         }
+        if cloud_environment.lower() == ".net":
+            get_records_url = "https://api.cloud.com/systemlog/records?StartDateTime={}".format(start_date)
+            get_records_headers["Citrix-CustomerId"] = customer_id
+        else:
+            get_records_url = "https://systemlog.citrixworkspacesapi{}/{}/records?StartDateTime={}".format(cloud_environment, customer_id, start_date)
+
+        if continuation_token != None:
+            get_records_url = "{}&ContinuationToken={}".format(get_records_url, continuation_token)
 
         records_response = helper.send_http_request(get_records_url, "GET", parameters=None, payload=None,
                                             headers=get_records_headers, cookies=None, verify=True, cert=None,
